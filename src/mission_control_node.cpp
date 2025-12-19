@@ -42,7 +42,7 @@ MissionControlNode::update_route()
 {
   if( current_route.has_value() && latest_vehicle_state.has_value() )
   {
-    if( current_route->get_length() - current_route->get_s( latest_vehicle_state.value() ) < 0.5 )
+    if( current_route->get_length() - current_route->get_s( latest_vehicle_state.value() ).value_or( current_route->get_length() ) < 0.5 )
       reach_goal();
   }
   if( !current_route && latest_vehicle_state && !goals.empty() && road_map )
